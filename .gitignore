@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+.codex-tasks/
+.runtime-data/
+npm-debug.log*

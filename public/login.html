@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team9-2API Login</title>
+    <link rel="stylesheet" href="/public/admin.css" />
+  </head>
+  <body class="paper-bg">
+    <main class="page-shell">
+      <section class="card sticky-card rotate-left">
+        <div class="pin"></div>
+        <p class="eyebrow">Authenticated Admin</p>
+        <h1>Team9-2API</h1>
+        <p class="lead">
+          Login with the admin key to manage Team9 model discovery, probe replies,
+          and protected OpenAI-compatible endpoints.
+        </p>
+        <form id="login-form" class="stack-md">
+          <label class="field">
+            <span>Admin key</span>
+            <input
+              id="admin-key"
+              name="key"
+              type="password"
+              autocomplete="off"
+              placeholder="sk-..."
+              required
+            />
+          </label>
+          <button class="sketch-button" type="submit">Open admin desk</button>
+          <p id="login-error" class="error-text" hidden></p>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="/public/login.js"></script>
+  </body>
+</html>
