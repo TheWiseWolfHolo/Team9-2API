@@ -64,6 +64,42 @@ describe("chat adapter", () => {
     ).toBe("Hello, Tymin! 👋");
   });
 
+  it("deduplicates identical assistant replies within the same turn", () => {
+    const messages: Team9Message[] = [
+      {
+        id: "assistant-dup-1",
+        senderId: "bot-user",
+        content: "Same final answer",
+        createdAt: "2026-04-03T18:26:12.317Z",
+        metadata: null,
+      },
+      {
+        id: "assistant-dup-2",
+        senderId: "bot-user",
+        content: "Same final answer",
+        createdAt: "2026-04-03T18:26:12.318Z",
+        metadata: null,
+      },
+      {
+        id: "assistant-tool",
+        senderId: "bot-user",
+        content: "SendToChannel",
+        createdAt: "2026-04-03T18:26:12.526Z",
+        metadata: {
+          status: "completed",
+          agentEventType: "tool_call",
+        },
+      },
+    ];
+
+    expect(
+      collectAssistantReply(messages, {
+        currentUserId: "human-user",
+        sentAt: "2026-04-03T18:26:12.000Z",
+      }),
+    ).toBe("Same final answer");
+  });
+
   it("builds OpenAI-compatible SSE chunks", () => {
     const chunks = buildStreamingChunks({
       id: "chatcmpl-test",

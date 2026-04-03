@@ -35,5 +35,13 @@ export function collectAssistantReply(
     .sort((left, right) => Date.parse(left.createdAt) - Date.parse(right.createdAt))
     .map((message) => message.content.trim());
 
-  return collected.length > 0 ? collected.join("\n\n") : null;
+  const deduplicated: string[] = [];
+  const seen = new Set<string>();
+  for (const content of collected) {
+    if (seen.has(content)) continue;
+    seen.add(content);
+    deduplicated.push(content);
+  }
+
+  return deduplicated.length > 0 ? deduplicated.join("\n\n") : null;
 }
